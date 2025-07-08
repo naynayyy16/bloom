@@ -1,0 +1,1531 @@
+/* Tasks Page - Enhanced Professional Design with Poppins Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Tasks Page Header - Right Aligned */
+.tasks-page-header {
+  text-align: right;
+  margin-bottom: var(--space-12);
+  padding: var(--space-8) 0;
+  border-bottom: 1px solid var(--border-primary);
+}
+
+.tasks-page-header.left-align {
+  text-align: left !important;
+  align-items: flex-start;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.tasks-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 42px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--space-3);
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.tasks-subtitle {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 16px;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 0 var(--space-8) auto;
+  line-height: 1.6;
+  text-align: left !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  font-weight: 400;
+}
+
+.tasks-actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-start;
+  margin-bottom: var(--space-8);
+  flex-wrap: wrap;
+}
+
+/* Kanban Container */
+.kanban-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+  height: auto;
+  min-height: 400px;
+  box-sizing: border-box;
+}
+
+/* Kanban Board Layout - 3 columns in one row */
+.kanban-board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+  margin-bottom: var(--space-8);
+  height: auto;
+  min-height: 350px;
+  align-items: flex-start;
+}
+
+/* Kanban Column */
+.kanban-column {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-2xl);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-spring);
+  position: relative;
+  min-height: 320px;
+  max-height: 70vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.kanban-column::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  opacity: 0.8;
+}
+
+.todo-column::before {
+  background: linear-gradient(90deg, #6b7280, #9ca3af);
+}
+
+.progress-column::before {
+  background: linear-gradient(90deg, #f59e0b, #fbbf24);
+}
+
+.completed-column::before {
+  background: linear-gradient(90deg, #10b981, #34d399);
+}
+
+.kanban-column:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: var(--shadow-2xl);
+  border-color: var(--border-secondary);
+}
+
+.kanban-column::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.1) 0%, 
+    rgba(255, 255, 255, 0.05) 100%);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.kanban-column:hover::after {
+  opacity: 1;
+}
+
+/* Column Header */
+.column-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  padding-bottom: var(--space-4);
+  border-bottom: 1px solid var(--border-primary);
+  position: relative;
+  z-index: 1;
+  transition: border-color var(--transition-fast);
+}
+
+.column-header:hover {
+  border-bottom-color: var(--border-secondary);
+}
+
+.column-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  transition: color var(--transition-fast);
+  cursor: pointer;
+}
+
+.column-title:hover,
+.column-title:focus-visible {
+  color: var(--primary-color);
+}
+
+.column-title:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-md);
+}
+
+.column-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.column-dot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  border-radius: inherit;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.column-title:hover .column-dot::before {
+  opacity: 1;
+}
+
+.column-dot.todo {
+  background: linear-gradient(135deg, #6b7280, #9ca3af);
+  box-shadow: 0 0 10px rgba(107, 114, 128, 0.3);
+}
+
+.column-dot.progress {
+  background: linear-gradient(135deg, #f59e0b, #fbbf24);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
+}
+
+.column-dot.completed {
+  background: linear-gradient(135deg, #10b981, #34d399);
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.task-count {
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 24px;
+  text-align: center;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.task-count::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.column-header:hover .task-count::before {
+  left: 100%;
+}
+
+.column-header:hover .task-count {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+/* Task List */
+.task-list {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  overflow-y: auto;
+  min-height: 0;
+  max-height: 100%;
+  padding-right: var(--space-2);
+}
+
+.task-list::-webkit-scrollbar {
+  width: 4px;
+}
+
+.task-list::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+.task-list::-webkit-scrollbar-thumb {
+  background: var(--border-secondary);
+  border-radius: var(--radius-full);
+  transition: background var(--transition-fast);
+}
+
+.task-list::-webkit-scrollbar-thumb:hover {
+  background: var(--border-tertiary);
+}
+
+/* Task Card */
+.task-card {
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(15px) saturate(150%);
+  -webkit-backdrop-filter: blur(15px) saturate(150%);
+  border: 1.5px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  transition: box-shadow 0.2s, border-color 0.2s, background 0.2s, transform 0.15s;
+  position: relative;
+  cursor: pointer;
+  animation: taskSlideIn 0.4s ease-out;
+}
+
+.task-card:hover {
+  background: var(--bg-glass);
+  box-shadow: 0 8px 32px 0 rgba(60, 60, 120, 0.12), 0 1.5px 6px 0 rgba(0,0,0,0.08);
+  border-color: var(--primary-color);
+  transform: translateY(-4px) scale(1.025);
+  z-index: 2;
+}
+
+.task-card:active {
+  transform: scale(0.98);
+}
+
+.task-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.05) 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+.task-card:hover::before {
+  opacity: 1;
+}
+
+.task-card:hover .task-title {
+  color: var(--primary-color);
+}
+
+.task-card:hover .task-priority {
+  transform: scale(1.05);
+}
+
+.task-card:hover .task-subject {
+  background: var(--bg-tertiary);
+}
+
+.task-card.completed {
+  opacity: 0.8;
+  background: var(--bg-tertiary);
+}
+
+.task-card.completed .task-title {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+/* Task Header */
+.task-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+  position: relative;
+  z-index: 1;
+}
+
+.task-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+  margin: 0;
+  flex: 1;
+  word-break: break-word;
+  transition: color var(--transition-fast);
+  max-height: 40px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.task-actions {
+  display: flex;
+  gap: var(--space-1);
+  opacity: 0;
+  transition: opacity var(--transition-normal);
+}
+
+.task-card:hover .task-actions {
+  opacity: 1;
+}
+
+.task-action-btn {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--space-1);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.task-action-btn:hover,
+.task-action-btn:focus-visible {
+  background: var(--bg-secondary);
+  border-color: var(--border-secondary);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-sm);
+}
+
+.task-action-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Task Description */
+.task-description {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+  word-break: break-word;
+  position: relative;
+  z-index: 1;
+  max-height: 60px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+/* Task Meta */
+.task-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.task-priority {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.task-priority::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  opacity: 0.1;
+}
+
+.task-priority.priority-low {
+  background: rgba(34, 197, 94, 0.1);
+  color: #16a34a;
+}
+
+.task-priority.priority-low::before {
+  background: #16a34a;
+}
+
+.task-priority.priority-medium {
+  background: rgba(245, 158, 11, 0.1);
+  color: #d97706;
+}
+
+.task-priority.priority-medium::before {
+  background: #d97706;
+}
+
+.task-priority.priority-high {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.task-priority.priority-high::before {
+  background: #dc2626;
+}
+
+/* Task Subject */
+.task-subject {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  border-left: 3px solid;
+  position: relative;
+  z-index: 1;
+  transition: background var(--transition-fast);
+}
+
+/* Task Due Date */
+.task-due-date {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10px;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  position: relative;
+  z-index: 1;
+}
+
+.task-due-date.overdue {
+  color: #dc2626;
+  font-weight: 600;
+}
+
+.task-due-date.due-soon {
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* Add Task Placeholder */
+.add-task-placeholder {
+  background: var(--bg-glass-subtle);
+  border: 2px dashed var(--border-secondary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  text-align: center;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  margin-top: var(--space-2);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+.add-task-placeholder::after {
+  content: '+';
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: all var(--transition-fast);
+}
+
+.add-task-placeholder:hover::after {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Empty State Enhancement */
+.task-list:empty::before {
+  content: 'No tasks yet';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100px;
+  color: var(--text-tertiary);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  font-style: italic;
+  opacity: 0.7;
+}
+
+.task-list:empty::after {
+  content: 'Click "Add Task" to get started';
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-quaternary);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-top: var(--space-2);
+  opacity: 0.5;
+}
+
+.add-task-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.add-task-placeholder:hover::before {
+  left: 100%;
+}
+
+.add-task-placeholder:hover,
+.add-task-placeholder:focus-visible {
+  background: var(--bg-glass);
+  border-color: var(--border-primary);
+  color: var(--text-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.add-task-placeholder:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Filter Select */
+.filter-select {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  background: var(--bg-glass);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-select::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+  pointer-events: none;
+}
+
+.filter-select:hover::before {
+  left: 100%;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+  transform: translateY(-1px);
+}
+
+.filter-select:hover,
+.filter-select:focus-visible {
+  border-color: var(--border-secondary);
+  background: var(--bg-glass-strong);
+}
+
+.filter-select:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Empty Column State */
+.empty-column {
+  text-align: center;
+  padding: var(--space-8);
+  color: var(--text-secondary);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  opacity: 0.7;
+  transition: all var(--transition-normal);
+}
+
+.empty-column i {
+  font-size: 24px;
+  margin-bottom: var(--space-3);
+  opacity: 0.5;
+}
+
+.empty-column p {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: var(--space-2);
+}
+
+.empty-column small {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+/* Filter Animation */
+.filter-select {
+  transform: scale(1);
+  transition: all 0.2s ease-out;
+}
+
+.filter-select:active {
+  transform: scale(0.95);
+}
+
+/* Notification Styles */
+.notification {
+  position: fixed;
+  top: var(--space-6);
+  right: var(--space-6);
+  background: var(--bg-glass-strong);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-toast);
+  transform: translateX(100%);
+  transition: all var(--transition-spring);
+  max-width: 400px;
+  font-size: 13px;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 500;
+}
+
+.notification.show {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.notification.success {
+  border-left: 4px solid #10b981;
+}
+
+.notification.error {
+  border-left: 4px solid #ef4444;
+}
+
+/* Loading Overlay */
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+}
+
+.loading-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.loading-spinner {
+  text-align: center;
+  color: white;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto var(--space-3);
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Button Enhancements */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+  border: none;
+  color: var(--text-inverse);
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: linear-gradient(135deg, var(--primary-hover) 0%, var(--accent-hover) 100%);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Secondary Button */
+.btn-secondary {
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--border-primary);
+  color: var(--text-primary);
+  font-weight: 500;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-spring);
+}
+
+.btn-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.btn-secondary:hover::before {
+  left: 100%;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus-visible {
+  background: var(--bg-glass-strong);
+  border-color: var(--border-secondary);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Filter Indicator */
+.filter-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--bg-glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--space-2) var(--space-3);
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-primary);
+  animation: slideInRight 0.3s ease-out;
+}
+
+.filter-label {
+  color: var(--primary-color);
+}
+
+.filter-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: 2px;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.filter-close:hover {
+  background: var(--bg-glass-strong);
+  color: var(--text-primary);
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animations */
+@keyframes taskSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes taskPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.task-card.new {
+  animation: taskPulse 0.6s ease-out;
+}
+
+.task-card.updated {
+  animation: taskSlideIn 0.4s ease-out;
+}
+
+.task-card.highlight {
+  animation: taskHighlight 2s ease-out;
+}
+
+.task-card.editing {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+  background: var(--bg-glass-strong);
+}
+
+.task-card:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+.task-card:focus-within .task-actions {
+  opacity: 1;
+}
+
+@keyframes taskHighlight {
+  0%, 100% {
+    background: var(--bg-glass-strong);
+  }
+  50% {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: #10b981;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .kanban-board {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4);
+  }
+  
+  .completed-column {
+    grid-column: span 2;
+  }
+  
+  .kanban-column {
+    min-height: 220px;
+    max-height: 55vh;
+  }
+  
+  .task-list {
+    max-height: calc(55vh - 90px);
+  }
+  
+  .task-card {
+    padding: var(--space-4);
+  }
+  
+  .tasks-title {
+    font-size: 36px;
+  }
+  
+  .tasks-subtitle {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .tasks-page-header {
+    text-align: center;
+    padding: var(--space-6) 0;
+  }
+  
+  .tasks-title {
+    text-align: center;
+    font-size: 32px;
+  }
+  
+  .tasks-subtitle {
+    text-align: center;
+    margin: 0 auto var(--space-6) auto;
+  }
+  
+  .tasks-actions {
+    justify-content: center;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .search-input {
+    min-width: 100%;
+    order: 1;
+  }
+
+  .filter-select {
+    min-width: 100%;
+    order: 2;
+  }
+  
+  .kanban-board {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
+  }
+  
+  .completed-column {
+    grid-column: span 1;
+  }
+  
+  .kanban-column {
+    min-height: 180px;
+    max-height: 45vh;
+  }
+  
+  .task-list {
+    max-height: calc(45vh - 90px);
+  }
+  
+  .task-card {
+    padding: var(--space-4);
+  }
+  
+  .task-header {
+    margin-bottom: var(--space-2);
+  }
+  
+  .task-meta {
+    margin-bottom: var(--space-2);
+  }
+  
+  .add-task-placeholder {
+    padding: var(--space-4);
+    font-size: 13px;
+  }
+  
+  .task-actions {
+    opacity: 1;
+  }
+  
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+  
+  .form-actions {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .tasks-actions {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .search-input,
+  .filter-select {
+    min-width: 100%;
+    font-size: 12px;
+  }
+  
+  .form-actions .btn {
+    width: 100%;
+  }
+
+  .search-input,
+  .filter-select {
+    min-width: 100%;
+  }
+
+  .filter-indicator {
+    font-size: 11px;
+    padding: var(--space-1) var(--space-2);
+  }
+}
+
+@media (max-width: 480px) {
+  .tasks-title {
+    font-size: 28px;
+  }
+  
+  .kanban-container {
+    padding: 0 var(--space-2);
+  }
+  
+  .kanban-column {
+    min-height: 120px;
+    max-height: 38vh;
+  }
+  
+  .task-list {
+    max-height: calc(38vh - 90px);
+  }
+  
+  .task-card {
+    padding: var(--space-3);
+  }
+  
+  .task-title {
+    font-size: 13px;
+  }
+  
+  .task-description {
+    font-size: 11px;
+  }
+  
+  .column-title {
+    font-size: 16px;
+  }
+  
+  .add-task-placeholder {
+    padding: var(--space-3);
+    font-size: 12px;
+  }
+  
+  .task-actions {
+    opacity: 1;
+  }
+  
+  .task-action-btn {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
+  
+  .form-group {
+    margin-bottom: var(--space-3);
+  }
+  
+  .form-group .form-label {
+    font-size: 12px;
+  }
+  
+  .form-group .form-input,
+  .form-group .form-select,
+  .form-group .form-textarea {
+    font-size: 13px;
+    padding: var(--space-2) var(--space-3);
+  }
+  
+  .form-actions {
+    margin-top: var(--space-4);
+    padding-top: var(--space-3);
+  }
+}
+
+/* Form Layout Enhancement */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.form-group {
+  margin-bottom: var(--space-5);
+}
+
+.form-group .form-label {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-2);
+  font-size: 13px;
+}
+
+.form-group .form-input,
+.form-group .form-select,
+.form-group .form-textarea {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  transition: all var(--transition-normal);
+}
+
+.form-group .form-input:focus,
+.form-group .form-select:focus,
+.form-group .form-textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+.form-group .form-input:focus-visible,
+.form-group .form-select:focus-visible,
+.form-group .form-textarea:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Modal Enhancements */
+.modal-title {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.modal-close:hover,
+.modal-close:focus-visible {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  transform: scale(1.1);
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.modal-content {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.modal-body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.modal-header {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-input,
+#taskForm .form-select,
+#taskForm .form-textarea {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-label {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .btn {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-actions {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-row {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-group {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-group .form-label {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-group .form-input,
+#taskForm .form-group .form-select,
+#taskForm .form-group .form-textarea {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-group .btn {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-group .btn:hover,
+#taskForm .form-group .btn:focus-visible {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+#taskForm .form-group .btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+#taskForm .form-group .btn:focus-visible:hover {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+#taskForm .form-group .btn:focus-visible:active {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Form Actions Enhancement */
+.form-actions {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+  margin-top: var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-primary);
+}
+
+.form-actions .btn {
+  min-width: 100px;
+  justify-content: center;
+}
+
+.form-actions .btn-secondary {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--border-primary);
+}
+
+.form-actions .btn-secondary:hover,
+.form-actions .btn-secondary:focus-visible {
+  background: var(--bg-tertiary);
+  border-color: var(--border-secondary);
+}
+
+.form-actions .btn-secondary:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* Accessibility Improvements */
+.task-card:focus-visible,
+.add-task-placeholder:focus-visible,
+.column-title:focus-visible,
+.task-action-btn:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+.task-card:focus-visible {
+  transform: translateY(-1px) scale(1.01);
+  box-shadow: var(--shadow-md);
+}
+
+.add-task-placeholder:focus-visible {
+  border-color: var(--border-focus);
+  background: var(--bg-glass);
+}
+
+/* Screen Reader Only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Loading States */
+.task-card.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.task-card.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid var(--border-primary);
+  border-top: 2px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.kanban-column.loading {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+/* Drag and Drop States */
+.task-card.dragging {
+  opacity: 0.8;
+  transform: rotate(2deg) scale(1.05);
+  box-shadow: var(--shadow-2xl);
+  z-index: var(--z-modal);
+  cursor: grabbing;
+}
+
+.kanban-column.drag-over {
+  background: var(--bg-glass-strong);
+  border-color: var(--primary-color);
+  transform: scale(1.02);
+}
+
+.kanban-column.drag-over::before {
+  opacity: 1;
+  background: var(--primary-color);
+}
+
+/* Performance Optimizations */
+.task-card,
+.kanban-column,
+.add-task-placeholder {
+  contain: layout style paint;
+  will-change: transform;
+}
+
+.task-card:hover,
+.kanban-column:hover {
+  will-change: transform, box-shadow;
+}
+
+/* Dark Mode Support (Future) */
+@media (prefers-color-scheme: dark) {
+  .task-card {
+    background: var(--bg-secondary);
+    border-color: var(--border-secondary);
+  }
+  
+  .kanban-column {
+    background: var(--bg-secondary);
+    border-color: var(--border-secondary);
+  }
+  
+  .add-task-placeholder {
+    background: var(--bg-tertiary);
+    border-color: var(--border-tertiary);
+  }
+  
+  .task-subject {
+    background: var(--bg-tertiary);
+  }
+  
+  .task-count {
+    background: var(--bg-tertiary);
+  }
+}
+
+/* Print Styles */
+@media print {
+  .task-actions,
+  .add-task-placeholder,
+  .tasks-actions {
+    display: none !important;
+  }
+  
+  .task-card {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+    background: white !important;
+  }
+  
+  .kanban-column {
+    background: white !important;
+    border: 1px solid #ccc;
+    box-shadow: none;
+  }
+  
+  .tasks-page-header {
+    text-align: left !important;
+    border-bottom: 2px solid #000;
+  }
+  
+  .tasks-title {
+    text-align: left !important;
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+  }
+  
+  .tasks-subtitle {
+    text-align: left !important;
+    color: #666 !important;
+  }
+}
+
+.task-actions i.fa-solid {
+  font-size: 15px;
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  pointer-events: none;
+}
+
+.task-action-btn:hover i.fa-solid,
+.task-action-btn:focus-visible i.fa-solid {
+  color: var(--primary-color);
+  transform: scale(1.15);
+}

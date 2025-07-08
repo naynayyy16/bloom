@@ -1,0 +1,233 @@
+<svg width="140" height="140" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="soilGradient" cx="50%" cy="60%" r="60%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="stemGradient" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" style="stop-color:#228B22;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#32CD32;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="leafGradient" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#90EE90;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#228B22;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="petalGradient" cx="30%" cy="30%" r="70%">
+      <stop offset="0%" style="stop-color:#FFD700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#FFA500;stop-opacity:1" />
+    </radialGradient>
+    <radialGradient id="centerGradient" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#654321;stop-opacity:1" />
+    </radialGradient>
+    <linearGradient id="potGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B7355;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5D4E37;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Pot -->
+  <ellipse cx="60" cy="110" rx="35" ry="15" fill="url(#potGradient)"/>
+  <rect x="25" y="95" width="70" height="20" rx="5" fill="url(#potGradient)"/>
+  
+  <!-- Soil -->
+  <ellipse cx="60" cy="98" rx="30" ry="12" fill="url(#soilGradient)"/>
+  
+  <!-- Root system (fully developed) with nutrient flow animation -->
+  <path d="M60 104 Q58 106 55 108 Q53 110 50 108" stroke="#90EE90" stroke-width="2.5" fill="none" opacity="0.8">
+    <animate attributeName="stroke-width" values="2.5;3;2.5" dur="4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="5s" repeatCount="indefinite"/>
+  </path>
+  <path d="M60 104 Q62 106 65 108 Q67 110 70 108" stroke="#90EE90" stroke-width="2.5" fill="none" opacity="0.8">
+    <animate attributeName="stroke-width" values="2.5;3;2.5" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="5s" repeatCount="indefinite" begin="0.5s"/>
+  </path>
+  <path d="M60 104 Q55 107 48 105" stroke="#90EE90" stroke-width="2" fill="none" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="6s" repeatCount="indefinite"/>
+  </path>
+  <path d="M60 104 Q65 107 72 105" stroke="#90EE90" stroke-width="2" fill="none" opacity="0.7">
+    <animate attributeName="opacity" values="0.7;0.9;0.7" dur="6s" repeatCount="indefinite" begin="1s"/>
+  </path>
+  
+  <!-- Main stem (taller and stronger) with slight sway -->
+  <rect x="57" y="45" width="6" height="55" rx="3" fill="url(#stemGradient)">
+    <animateTransform attributeName="transform" 
+                      values="rotate(0 60 100);rotate(1 60 100);rotate(0 60 100);rotate(-1 60 100);rotate(0 60 100)" 
+                      dur="8s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Large leaves along stem with natural movement -->
+  <ellipse cx="48" cy="80" rx="12" ry="8" fill="url(#leafGradient)" transform="rotate(-25 48 80)">
+    <animateTransform attributeName="transform" 
+                      values="rotate(-25 48 80);rotate(-30 48 80);rotate(-22 48 80);rotate(-28 48 80);rotate(-25 48 80)" 
+                      dur="6s" repeatCount="indefinite"/>
+    <animate attributeName="rx" values="12;12.5;12" dur="8s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="72" cy="75" rx="12" ry="8" fill="url(#leafGradient)" transform="rotate(25 72 75)">
+    <animateTransform attributeName="transform" 
+                      values="rotate(25 72 75);rotate(30 72 75);rotate(22 72 75);rotate(28 72 75);rotate(25 72 75)" 
+                      dur="6s" repeatCount="indefinite" begin="1s"/>
+    <animate attributeName="rx" values="12;12.5;12" dur="8s" repeatCount="indefinite" begin="1s"/>
+  </ellipse>
+  <ellipse cx="45" cy="65" rx="10" ry="6" fill="url(#leafGradient)" transform="rotate(-20 45 65)" opacity="0.9">
+    <animateTransform attributeName="transform" 
+                      values="rotate(-20 45 65);rotate(-23 45 65);rotate(-17 45 65);rotate(-20 45 65)" 
+                      dur="7s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="75" cy="60" rx="10" ry="6" fill="url(#leafGradient)" transform="rotate(20 75 60)" opacity="0.9">
+    <animateTransform attributeName="transform" 
+                      values="rotate(20 75 60);rotate(23 75 60);rotate(17 75 60);rotate(20 75 60)" 
+                      dur="7s" repeatCount="indefinite" begin="0.5s"/>
+  </ellipse>
+  
+  <!-- Leaf veins with life-like pulsing -->
+  <path d="M48 80 L52 78 M48 80 L52 82 M48 80 L50 80" stroke="#228B22" stroke-width="0.8" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="4s" repeatCount="indefinite"/>
+  </path>
+  <path d="M72 75 L68 73 M72 75 L68 77 M72 75 L70 75" stroke="#228B22" stroke-width="0.8" opacity="0.9">
+    <animate attributeName="opacity" values="0.9;1;0.9" dur="4s" repeatCount="indefinite" begin="0.7s"/>
+  </path>
+  
+  <!-- Sunflower bloom with enhanced rotation -->
+  <g>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(0 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(30 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(60 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(90 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(120 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(150 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(180 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(210 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(240 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(270 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(300 60 25)"/>
+    <ellipse cx="60" cy="25" rx="4" ry="12" fill="url(#petalGradient)" transform="rotate(330 60 25)"/>
+    
+    <!-- Enhanced rotation animation -->
+    <animateTransform attributeName="transform" type="rotate" 
+                      values="0 60 25;3 60 25;0 60 25;-3 60 25;0 60 25" 
+                      dur="12s" repeatCount="indefinite"/>
+  </g>
+  
+  <!-- Flower center with pulsing -->
+  <circle cx="60" cy="25" r="8" fill="url(#centerGradient)">
+    <animate attributeName="r" values="8;8.5;8" dur="6s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Center pattern with coordinated animation -->
+  <circle cx="57" cy="22" r="1.5" fill="#A0522D">
+    <animate attributeName="r" values="1.5;1.7;1.5" dur="4s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="63" cy="22" r="1.5" fill="#A0522D">
+    <animate attributeName="r" values="1.5;1.7;1.5" dur="4s" repeatCount="indefinite" begin="0.5s"/>
+  </circle>
+  <circle cx="60" cy="28" r="1.5" fill="#A0522D">
+    <animate attributeName="r" values="1.5;1.7;1.5" dur="4s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+  <circle cx="57" cy="25" r="1" fill="#8B4513">
+    <animate attributeName="opacity" values="1;0.7;1" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="63" cy="25" r="1" fill="#8B4513">
+    <animate attributeName="opacity" values="1;0.7;1" dur="3s" repeatCount="indefinite" begin="0.8s"/>
+  </circle>
+  <circle cx="60" cy="25" r="1" fill="#654321">
+    <animate attributeName="opacity" values="1;0.8;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Flower highlight with shimmer -->
+  <circle cx="57" cy="21" r="2" fill="#FFF" opacity="0.3">
+    <animate attributeName="opacity" values="0.3;0.5;0.3" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="57;58;57" dur="8s" repeatCount="indefinite"/>
+  </circle>
+  
+  <!-- Achievement sparkles with celebration effect -->
+  <g opacity="0.9">
+    <circle cx="40" cy="15" r="2" fill="#FFD700">
+      <animate attributeName="opacity" values="0.9;0.4;0.9" dur="1.5s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="2;2.5;2" dur="1.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="80" cy="20" r="1.5" fill="#FFD700">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.5;2;1.5" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="35" cy="35" r="1.8" fill="#FFD700">
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.8;2.3;1.8" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="85" cy="40" r="1.3" fill="#FFD700">
+      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="1.8s" repeatCount="indefinite"/>
+      <animate attributeName="r" values="1.3;1.8;1.3" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="45" cy="10" r="1.6" fill="#32CD32">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="75" cy="8" r="1.4" fill="#FFD700">
+      <animate attributeName="opacity" values="0.7;0.3;0.7" dur="1.7s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- Success message with celebration animation -->
+  <text x="60" y="8" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#10B981" font-weight="700">
+    🌻 PRODUCTIVITY MASTER! 🌻
+    <animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="font-size" values="8;8.5;8" dur="3s" repeatCount="indefinite"/>
+  </text>
+  
+  <!-- Bees visiting the flower with realistic flight -->
+  <g>
+    <ellipse cx="75" cy="30" rx="2" ry="1" fill="#FFD700" opacity="0.8">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0;8,-3;12,1;5,4;-2,2;0,0" 
+                        dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite"/>
+    </ellipse>
+    <ellipse cx="76" cy="30" rx="1" ry="0.5" fill="#000" opacity="0.6">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0;8,-3;12,1;5,4;-2,2;0,0" 
+                        dur="8s" repeatCount="indefinite"/>
+    </ellipse>
+    <!-- Second bee -->
+    <ellipse cx="45" cy="35" rx="1.8" ry="0.9" fill="#FFD700" opacity="0.7">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0;-5,3;-8,-2;-3,-4;2,-1;0,0" 
+                        dur="10s" repeatCount="indefinite" begin="2s"/>
+      <animate attributeName="opacity" values="0.7;0.9;0.7" dur="10s" repeatCount="indefinite" begin="2s"/>
+    </ellipse>
+    <ellipse cx="46" cy="35" rx="0.9" ry="0.4" fill="#000" opacity="0.5">
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0;-5,3;-8,-2;-3,-4;2,-1;0,0" 
+                        dur="10s" repeatCount="indefinite" begin="2s"/>
+    </ellipse>
+  </g>
+  
+  <!-- Pollen particles floating -->
+  <g opacity="0.6">
+    <circle cx="55" cy="20" r="0.8" fill="#FFFF99">
+      <animate attributeName="cy" values="20;15;20" dur="6s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0.9;0.6" dur="6s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="65" cy="22" r="0.6" fill="#FFFF99">
+      <animate attributeName="cy" values="22;17;22" dur="7s" repeatCount="indefinite" begin="1s"/>
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="7s" repeatCount="indefinite" begin="1s"/>
+    </circle>
+    <circle cx="58" cy="18" r="0.7" fill="#FFFF99">
+      <animate attributeName="cy" values="18;13;18" dur="5s" repeatCount="indefinite" begin="2s"/>
+      <animate attributeName="opacity" values="0.6;0.8;0.6" dur="5s" repeatCount="indefinite" begin="2s"/>
+    </circle>
+  </g>
+  
+  <!-- Gentle wind effect -->
+  <g opacity="0.3">
+    <path d="M20 30 Q40 28 60 30 Q80 32 100 30" stroke="#E8F5E8" stroke-width="1" fill="none">
+      <animate attributeName="opacity" values="0.3;0.1;0.3" dur="8s" repeatCount="indefinite"/>
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0;10,0;0,0" dur="8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M15 50 Q35 48 55 50 Q75 52 95 50" stroke="#E8F5E8" stroke-width="0.8" fill="none">
+      <animate attributeName="opacity" values="0.2;0.4;0.2" dur="10s" repeatCount="indefinite" begin="2s"/>
+      <animateTransform attributeName="transform" type="translate" 
+                        values="0,0;15,0;0,0" dur="10s" repeatCount="indefinite" begin="2s"/>
+    </path>
+  </g>
+</svg>
