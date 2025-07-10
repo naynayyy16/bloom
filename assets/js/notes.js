@@ -605,15 +605,16 @@ class NotesManager {
   }
 
   loadSubjects() {
-    fetch("api/subjects.php?action=list")
+    fetch("api/subjects.php")
       .then((response) => response.json())
       .then((data) => {
-        if (data.success && Array.isArray(data.subjects)) {
-          this.currentSubjects = data.subjects;
+        if (data.success && Array.isArray(data.data)) {
+          this.currentSubjects = data.data;
         } else {
           this.currentSubjects = [];
         }
         this.populateSubjectDropdown();
+        console.log('Notes: Loaded', this.currentSubjects.length, 'subjects');
       })
       .catch((error) => {
         this.currentSubjects = [];
@@ -718,6 +719,11 @@ class NotesManager {
     const modal = document.getElementById("noteModal");
     const form = document.getElementById("noteForm");
     const title = document.getElementById("noteModalTitle");
+
+    // Ensure subjects are loaded
+    if (this.currentSubjects.length === 0) {
+      this.loadSubjects();
+    }
 
     if (noteId) {
       const note = this.currentNotes.find((n) => n.id == noteId);
@@ -908,10 +914,12 @@ class NotesManager {
 
     const subjects = Array.isArray(this.currentSubjects) ? this.currentSubjects : [];
     select.innerHTML =
-      '<option value="">Select Subject (Optional)</option>' +
+      '<option value="">Pilih Mata Pelajaran (Opsional)</option>' +
       subjects
         .map((subject) => `<option value="${subject.id}">${this.escapeHtml(subject.name)}</option>`)
         .join("");
+    
+    console.log('Subject dropdown populated with', subjects.length, 'subjects');
   }
 
   // Auto-save functionality

@@ -48,7 +48,7 @@ $completed_tasks = array_filter($tasks, function($task) { return $task['status']
 
 <div class="kanban-container">
     <div class="kanban-board">
-        <div class="kanban-column todo-column">
+        <div class="kanban-column todo-column" data-status="todo">
             <div class="column-header">
                 <div class="column-title">
                     <span class="column-dot todo"></span>
@@ -99,7 +99,7 @@ $completed_tasks = array_filter($tasks, function($task) { return $task['status']
             </div>
         </div>
         
-        <div class="kanban-column progress-column">
+        <div class="kanban-column progress-column" data-status="progress">
             <div class="column-header">
                 <div class="column-title">
                     <span class="column-dot progress"></span>
@@ -150,7 +150,7 @@ $completed_tasks = array_filter($tasks, function($task) { return $task['status']
             </div>
         </div>
         
-        <div class="kanban-column completed-column">
+        <div class="kanban-column completed-column" data-status="completed">
             <div class="column-header">
                 <div class="column-title">
                     <span class="column-dot completed"></span>

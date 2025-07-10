@@ -1433,6 +1433,7 @@
   background: var(--bg-glass-strong);
   border-color: var(--primary-color);
   transform: scale(1.02);
+  box-shadow: 0 0 0 2px var(--primary-color);
 }
 
 .kanban-column.drag-over::before {

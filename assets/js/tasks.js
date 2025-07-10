@@ -238,7 +238,7 @@ class TaskManager {
   }
 
   setupColumnDropping() {
-    document.querySelectorAll('.task-column').forEach(column => {
+    document.querySelectorAll('.kanban-column').forEach(column => {
       column.addEventListener('dragover', (e) => {
         e.preventDefault();
         column.classList.add('drag-over');
@@ -291,9 +291,9 @@ class TaskManager {
     this.updateDragPreviewPosition(e);
     
     // Check for column hover
-    const columnUnder = document.elementFromPoint(e.clientX, e.clientY)?.closest('.task-column');
+    const columnUnder = document.elementFromPoint(e.clientX, e.clientY)?.closest('.kanban-column');
     
-    document.querySelectorAll('.task-column').forEach(col => {
+    document.querySelectorAll('.kanban-column').forEach(col => {
       col.classList.remove('drag-over');
     });
     
@@ -309,7 +309,7 @@ class TaskManager {
     
     // Use elementFromPoint to find the element under the cursor
     const elementUnder = document.elementFromPoint(e.clientX, e.clientY);
-    const columnUnder = elementUnder && elementUnder.closest ? elementUnder.closest('.task-column') : null;
+    const columnUnder = elementUnder && elementUnder.closest ? elementUnder.closest('.kanban-column') : null;
     
     if (columnUnder) {
       const newStatus = columnUnder.dataset.status;
@@ -320,7 +320,7 @@ class TaskManager {
     
     // Cleanup
     this.draggedTask.classList.remove('dragging');
-    document.querySelectorAll('.task-column').forEach(col => {
+    document.querySelectorAll('.kanban-column').forEach(col => {
       col.classList.remove('drag-over');
     });
     
@@ -336,6 +336,13 @@ class TaskManager {
     if (this.dragPreview) {
       this.dragPreview.style.left = (e.clientX - 160) + 'px';
       this.dragPreview.style.top = (e.clientY - 50) + 'px';
+    }
+  }
+
+  moveTaskToColumn(taskCard, newStatus) {
+    const taskId = taskCard.dataset.taskId;
+    if (taskId) {
+      this.updateTaskStatus(taskId, newStatus);
     }
   }
 
@@ -608,6 +615,7 @@ class TaskManager {
       .then((data) => {
         this.currentSubjects = Array.isArray(data.data) ? data.data : [];
         this.populateSubjectDropdown();
+        console.log('Tasks: Loaded', this.currentSubjects.length, 'subjects');
         if (typeof callback === 'function') callback();
       })
       .catch((error) => {
@@ -743,6 +751,11 @@ class TaskManager {
     const modalTitle = document.getElementById("taskModalTitle");
     const taskForm = document.getElementById("taskForm");
     const statusSelect = document.getElementById("taskStatus");
+    
+    // Ensure subjects are loaded
+    if (this.currentSubjects.length === 0) {
+      this.loadSubjects();
+    }
     
     if (modal && modalTitle && taskForm) {
       if (taskId) {
@@ -1290,8 +1303,10 @@ class TaskManager {
     if (!select) return;
     const subjects = Array.isArray(this.currentSubjects) ? this.currentSubjects : [];
     select.innerHTML =
-      '<option value="">Select Subject</option>' +
+      '<option value="">Pilih Mata Pelajaran</option>' +
       subjects.map((subject) => `<option value="${subject.id}">${this.escapeHtml(subject.name)}</option>`).join("");
+    
+    console.log('Task subject dropdown populated with', subjects.length, 'subjects');
   }
 
   createQuickActionRipple(element, event) {
