@@ -679,7 +679,7 @@ class TaskManager {
         const isOverdue = task.due_date && new Date(task.due_date) < new Date();
         const isDueSoon = task.due_date && new Date(task.due_date) <= new Date(Date.now() + 24 * 60 * 60 * 1000);
         return `
-          <div class="task-card ${task.completed ? "completed" : ""} priority-${task.priority}" 
+          <div class="task-card ${task.status === "completed" ? "completed" : ""} priority-${task.priority}" 
                data-task-id="${task.id}" 
                data-status="${task.status}"
                style="animation-delay: ${index * 0.1}s">
